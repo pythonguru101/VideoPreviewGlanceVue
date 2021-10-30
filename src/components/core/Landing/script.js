@@ -1,16 +1,16 @@
 import samples from 'paraview-glance/src/samples';
 import DragAndDrop from 'paraview-glance/src/components/widgets/DragAndDrop';
+import webrtc from 'paraview-glance/src/components/webrtc';
 
 export default {
   name: 'Landing',
   components: {
     DragAndDrop,
+    webrtc,
   },
   data() {
     return {
       samples,
-      img: null,
-      roomId: 'public-room-v2',
       version: window.GLANCE_VERSION || 'no version available',
     };
   },
@@ -23,24 +23,6 @@ export default {
         names.push(sample.datasets[i].name);
       }
       this.$emit('open-urls', sample.label, urls, names);
-    },
-    onCapture() {
-      this.img = this.$refs.webrtc.capture();
-    },
-    onJoin() {
-      this.$refs.webrtc.join();
-    },
-    onLeave() {
-      this.$refs.webrtc.leave();
-    },
-    onShareScreen() {
-      this.img = this.$refs.webrtc.shareScreen();
-    },
-    onError(error, stream) {
-      console.log('On Error Event', error, stream);
-    },
-    logEvent(event) {
-      console.log('Event : ', event);
     },
   },
 };
